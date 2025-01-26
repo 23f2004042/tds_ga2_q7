@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: "0 * * * *" # Runs every hour at the start of the hour
   workflow_dispatch: # Allows manual triggering of the workflow
+
+permissions:
+  contents: write  # Grants write access to the repository content
   
 jobs:
   update-time:
