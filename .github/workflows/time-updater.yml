@@ -1,0 +1,28 @@
+name: Update Time File
+
+on:
+  schedule:
+    - cron: "0 * * * *" # Runs every hour at the start of the hour
+  workflow_dispatch: # Allows manual triggering of the workflow
+  
+jobs:
+  update-time:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 23f2004042@ds.study.iitm.ac.in
+        run: echo "Time Logger! Simple github action"
+
+      - name: Get current time
+        run: echo "$(date)" > current_time.txt
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "23f2004042"
+          git config user.email "23f2004042@ds.study.iitm.ac.in"
+          git add current_time.txt
+          git commit -m "Update time: $(date)"
+          git push
