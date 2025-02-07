@@ -1,0 +1,31 @@
+name: Update Time File
+
+on:
+  schedule:
+    - cron: "57 16 * * *" # Runs once a day at 4 pm 57 mins
+  workflow_dispatch: # Allows manual triggering of the workflow
+
+permissions:
+  contents: write  # Grants write access to the repository content
+  
+jobs:
+  update-time:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 23f2004042@ds.study.iitm.ac.in
+        run: echo "Time Logger! Simple github action"
+
+      - name: Get current time
+        run: echo "$(date)" > current_time_once.txt
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "23f2004042"
+          git config user.email "23f2004042@ds.study.iitm.ac.in"
+          git add current_time_once.txt
+          git commit -m "Update time: $(date)"
+          git push
